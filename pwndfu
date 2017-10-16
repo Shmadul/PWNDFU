@@ -1,0 +1,45 @@
+#!/usr/bin/python
+# ipwndfu: open-source jailbreaking tool for older iOS devices
+# Author: axi0mX & @shmadul
+
+import binascii, datetime, getopt, hashlib, struct, sys, time
+import dfu
+import limera1n, SHAtter, steaks4uce
+import subprocess
+import shlex
+from dfuexec import *
+
+if __name__ == '__main__':
+    try:
+        advanced = ['dump=', 'hexdump=', 'dump-rom', 'dump-nor=', 'flash-nor=', '24kpwn', 'remove-24kpwn', 'remove-alloc8', 'decrypt-gid=', 'encrypt-gid=', 'decrypt-uid=', 'decrypt-gid=']
+        opts, args = getopt.getopt(sys.argv[1:], 'pxf:', advanced)
+    except getopt.GetoptError:
+        print 'ERROR: Invalid arguments provided.'
+        print_help()
+        sys.exit(2)
+
+    if len(opts) == 0:
+        device = dfu.acquire_device()
+        serial_number = device.serial_number
+        dfu.release_device(device)
+        if 'CPID:8720' in serial_number:
+            steaks4uce.exploit()
+        elif 'CPID:8920' in serial_number:
+            limera1n.exploit()
+        elif 'CPID:8922' in serial_number:
+            limera1n.exploit()
+        elif 'CPID:8930' in serial_number:
+            SHAtter.exploit()
+        else:
+        	print 'Found:', serial_number
+        	print 'ERROR: This device is not supported.'
+        sys.exit(1)
+
+    for opt, arg in opts:
+        if opt == '-f':
+            try:
+                with open(arg, 'rb') as f:
+                    data = f.read()
+            except IOError:
+                print 'ERROR: Could not read file:', arg
+                sys.exit(1)

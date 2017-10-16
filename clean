@@ -1,0 +1,12 @@
+#!/bin/bash
+echo Removing dfu.pyc
+rm -r /Users/shmadul/Desktop/ipwndfu/pwndfu/dfu.pyc 
+echo Removing dfuexec.pyc
+rm -r /Users/shmadul/Desktop/ipwndfu/pwndfu/dfuexec.pyc 
+echo Removing limera1n.pyc
+rm -r /Users/shmadul/Desktop/ipwndfu/pwndfu/limera1n.pyc 
+echo Removing SHAtter.pyc
+rm -r /Users/shmadul/Desktop/ipwndfu/pwndfu/SHAtter.pyc 
+echo Removing steaks4uce.pyc
+rm -r /Users/shmadul/Desktop/ipwndfu/pwndfu/steaks4uce.pyc 
+echo Done Cleaning
